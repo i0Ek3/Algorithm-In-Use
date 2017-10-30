@@ -58,7 +58,7 @@ int main()
 * 用gets()和puts()输入、输出一行字符串
 * float和double更推荐double
 * 在浮点数的比较中利用eps(=10^-8)来修正误差
-    * ```C
-      const double eps = 1e-8;
-      ```
+    ```C
+    const double eps = 1e-8;
+    ```
 
