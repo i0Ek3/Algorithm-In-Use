@@ -6,7 +6,7 @@
 
 ### 符号常量
 ```C
-#define PI = 3,14
+#define PI 3.14
 const double PI = 3.14; //recommand
 ```
 ### 多点测试
