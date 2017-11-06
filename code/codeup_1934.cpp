@@ -1,32 +1,29 @@
 // lookup for x
 // codeup 1934
+// 原题是输入不同的几个值,你也可以考虑输入几个连续且相同的数字
 
 #include <iostream>
 #include <cstdio>
+const int maxn = 210;
+int num[maxn];
 
 int main()
 {
-    int n,x;
-    int num[] = {0};
-    printf("plz input an num n:\n");
-    scanf("%d",&n);
-    printf("Plz input %d nums:\n",n);
-    for(int k = 0; k < 3; k++)
+    int n,x,k;
+    while(scanf("%d",&n) != EOF)
     {
-        scanf("%d",&n);
-        num[k] += n;
-    }
-    printf("plz input an num x:\n");
-    scanf("%d",&x);
-    for (int i = 0; i < n; i++)
-    {
-        if((x < num[i]) || (x > num[n]))
+        for(int i = 0; i < n; i++)
+            scanf("%d",&num[i]);
+        scanf("%d",&x);
+        for(k = 0; k < n; k++)
         {
-            printf("-1\n");
-            break;
+            if(num[k] == x)
+            {
+                printf("%d\n",k);
+                break;
+            }
         }
-        else
-            printf("The %d's index is %d!\n",x,x-1);
+        if(k == n) printf("-1\n");
     }
     return 0;
 }
