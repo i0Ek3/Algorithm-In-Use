@@ -19,7 +19,7 @@ int leap = 365;//闰年天数
 int unleap = 366;//非闰年天数
 int cnt = 0;//闰年个数
 
-void calDate()
+void calDate(int year1,int month1,int date1,int year2,int month2,int date2)
 {
     for(int i = 0; i < month1; i++)//计算第一个输入的年份日期的当前天数
     {
@@ -50,9 +50,10 @@ void calDate()
     }
 }
     
-void diffDate()//计算相差天数
+//void diffDate()//计算相差天数
+void diffDate(int year1,int month1,int date1,int year2,int month2,int date2)
 {
-    if (year1 + 1 == year2 || year2 + 1 == year1)//连续年份相差天数
+    if (year1 + 1 == year2) //|| year2 + 1 == year1)//连续年份相差天数
     {
         diff = cur1 + cur2;
         printf("%d\n",diff);
@@ -75,9 +76,11 @@ int main()
 {
     while(scanf("%4d%2d%2d\n%4d%2d%2d\n",&year1,&month1,&date1,&year2,&month2,&date2) != EOF)
     {
-        calDate();
+        //calDate();
+        calDate(year1,month1,date1,year2,month2,date2);
     }
-    diffDate();
+    //diffDate();
+    diffDate(year1,month1,date1,year2,month2,date2);
 
     return 0;
 }
