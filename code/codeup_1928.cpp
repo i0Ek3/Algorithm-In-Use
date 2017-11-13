@@ -9,25 +9,24 @@
 #include <cstdio>
 #include <math.h>
 
-int main()
+//Golobal var
+int year1,year2,month1,month2,date1,date2,cur1,cur2,diff;
+int day1[] = {31,28,31,30,31,30,31,31,30,31,30,31};
+int day2[] = {31,29,31,30,31,30,31,31,30,31,30,31};
+int sum1 = 0;
+int sum2 = 0;
+int leap = 365;//闰年天数
+int unleap = 366;//非闰年天数
+int cnt = 0;//闰年个数
+
+void calDate()
 {
-    int year1,year2,month1,month2,date1,date2,cur1,cur2,diff;
-    int day1[] = {31,28,31,30,31,30,31,31,30,31,30,31};
-    int day2[] = {31,29,31,30,31,30,31,31,30,31,30,31};
-    int sum1 = 0;
-    int sum2 = 0;
-    int leap = 365;//闰年天数
-    int unleap = 366;//非闰年天数
-
-
-    while(scanf("%d%d%d\n%d%d%d",&year1,&month1,&date1,&year2,&month2,&date2) != EOF)
-    {
     for(int i = 0; i < month1; i++)//计算第一个输入的年份日期的当前天数
     {
         if(year1 % 400 != 0 || (year1 % 4 == 0 && year1 % 100 == 0))
         {
             sum1 += day1[i];
-            cur1 = sum1 + date1;//当前年份的天数
+            cur1 = sum1 + date1;//当前闰年年份的天数
         }
         else
         {
@@ -49,7 +48,10 @@ int main()
             cur2 = unleap - (sum2 + date2);  
         }    
     }
-
+}
+    
+void diffDate()//计算相差天数
+{
     if (year1 + 1 == year2 || year2 + 1 == year1)//连续年份相差天数
     {
         diff = cur1 + cur2;
@@ -57,10 +59,25 @@ int main()
     }
     else//非连续年份相差天数
     {
-        diff = cur1 + cur2 + leap*(year1-year2);
+        for(int i = year1; i <= year2; i++)
+        {
+            if(i % 400 != 0 || (i % 4 == 0 && i % 100 == 0))
+            {
+                cnt++;
+            }
+        }
+        diff = cur1 + cur2 + cnt*(year1-year2);
         printf("%d\n",diff);
     }
+}
+
+int main()
+{
+    while(scanf("%4d%2d%2d\n%4d%2d%2d\n",&year1,&month1,&date1,&year2,&month2,&date2) != EOF)
+    {
+        calDate();
+    }
+    diffDate();
 
     return 0;
-    }
 }
