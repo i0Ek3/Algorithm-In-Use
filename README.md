@@ -65,4 +65,7 @@ int main()
     ```C
     const double eps = 1e-8;
     ```
-
+* 以下代码仅仅声明了i而没有定义它 
+    ```C
+    extern int i;
+    ```
