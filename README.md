@@ -69,3 +69,5 @@ int main()
     ```C
     extern int i;
     ```
+* nan表示Not a Number
+  inf表示infinity无限大
