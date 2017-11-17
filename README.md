@@ -61,6 +61,7 @@ int main()
 * 用getchar()/putchar()输入、输出单个字符
 * 用gets()和puts()输入、输出一行字符串
 * float和double更推荐double
+* const对象必须初始化
 * 在浮点数的比较中利用eps(=10^-8)来修正误差
     ```C
     const double eps = 1e-8;
@@ -69,5 +70,15 @@ int main()
     ```C
     extern int i;
     ```
-* nan表示Not a Number<br>
-  inf表示infinity无限大
+* nan表示Not a Number,inf表示Infinity无限大
+* 尽量避免如下写法
+    ```C
+    int* p1,p2;
+    ```
+  应该写成这样
+    ```C
+    int *p1,p2; 
+    int *p1;
+    int *p2;
+    ```
+* 面对较为复杂的指针或引用的声明语句时,可考虑从右往左阅读
