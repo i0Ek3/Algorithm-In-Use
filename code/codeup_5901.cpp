@@ -9,10 +9,10 @@
 
 int main()
 {
-    char str[255];
+    char str[256];
     int i;
     
-    while(scanf("%s",str))
+    while(scanf("%s",str) != EOF)
     {
         int len = strlen(str);
         if(len % 2 == 0)//even不可能为回文数 
