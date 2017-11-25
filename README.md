@@ -50,7 +50,7 @@ int main()
 }   
 ```
 
-# 注意
+### 注意
 * scanf对%s不需要&
     ```C
     scanf("%d-%lld-%f-%lf-%c-%s\n",&n,&n,&fl,&db,&c,str);
@@ -81,3 +81,8 @@ int main()
     int *p2;
     ```
 * 面对较为复杂的指针或引用的声明语句时,可考虑从右往左阅读
+
+###Updates
+>2017
+>>11-25:Whatever update now...add something you can find in the file code/.<br>
+
