@@ -85,5 +85,5 @@ int main()
 ### Updates
 >2017
 >>11-25:Whatever I'll update...add something you can find in the file code/,actually my pc boomed!!!.<br>
-
+>>11-26:Next chapter learning--sort algorithm!<br>
 
