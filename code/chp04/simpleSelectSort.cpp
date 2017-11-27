@@ -7,7 +7,7 @@
 #include <iostream>
 #include <cstdio>
 
-int sss(int *a,int n)
+void sss(int *a,int n)
 {
     int i,j,k;
     for (int i = 1; i <= n; i++)
@@ -25,24 +25,26 @@ int sss(int *a,int n)
     int temp = a[i];
     a[i] = a[k];
     a[k] = temp;
+
     for (int i = 0; i < n; i++)
     {
         printf("%d ",a[i]);
     }
-    return 0;
 }
 
+#if 0
 int main()
 {
-    int a[5] = {2,3,1,8,5};
+    int b[5];
     printf("The original numbers is: \n");
     for (int i = 0; i < 5; i++)
     {
-        printf("%d ",a[i]);
+        printf("%d ",b[i]);
     }
     printf("\nThe sorted numbers is: \n");
-    int ret = sss(a,5);
-    printf("%d ",ret);
+    sss(b[2,3,1,8,5],5);
     printf("\n");
     return 0;
 }
+#endif
+
