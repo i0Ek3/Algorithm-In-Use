@@ -86,4 +86,4 @@ int main()
 >2017
 >>11-25:Whatever I'll update...add something you can find in the file code/,actually my pc boomed!!!.<br>
 >>11-26:Add next chapter learning--sort algorithm!<br>
-
+>>11-27:Add insertSort algorithm.<br>
