@@ -60,3 +60,4 @@ while(T--){...} //while(T--)，即给定测试数据的组数，需要用变量T
 >>11-26:Add next chapter learning--sort algorithm!<br>
 >>11-27:Add insertSort algorithm.<br>
 >>12-05:Add sort contents.<br>
+>>[More...](https://github.com/i0Ek3/AlgorithmNotes/blob/master/code/updates.md)
