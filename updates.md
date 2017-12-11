@@ -8,7 +8,7 @@
 >>12-08:Add contents about hash.<br> 
 >>12-09:Add contents about recursion.<br>
 >>12-10:Supplement something:N Queen.<br>
-
+>>12-11:Add greedy algorithm contens.<br>
 
 
 
