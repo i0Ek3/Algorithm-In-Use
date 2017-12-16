@@ -11,5 +11,5 @@
 >>12-11:Add greedy algorithm contens.<br>
 >>12-12:Add pat_b1023.<br>
 >>12-15:Add something about binary search.<br>
-
+>>12-16:Supplyment yesterday contents.<br>
 
