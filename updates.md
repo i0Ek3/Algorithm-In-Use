@@ -12,4 +12,7 @@
 >>12-12:Add pat_b1023.<br>
 >>12-15:Add something about binary search.<br>
 >>12-16:Supplyment yesterday contents.<br>
+>>12-18:Pause update casuse of my exam.Maybe next time is 2018!Who cares? <br>
+
+
 
