@@ -2,6 +2,9 @@
 
 Personal learning Algorithm notes.Instances with .cpp or .c files.
 
+## Plan
+- [leetcode](https://leetcode.com/problemset/all/)
+
 ## Instances
 
 |---|-------|----|
