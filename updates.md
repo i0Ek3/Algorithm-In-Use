@@ -16,3 +16,8 @@
 >>12-19:Actually not I am update now.Just add something.<br>
 >>12-26:I made a falut decision cause of my finnal exam and I stopped to learning algorithm,that's unbelieveable for me to find a reason to avoid something,whatever you need spent some time to learn something but why not algorithm?Just do it man!
 
+>2018
+>>01-14:Add a plan to accomplish the problems on leetcode.<br>
+
+
+
