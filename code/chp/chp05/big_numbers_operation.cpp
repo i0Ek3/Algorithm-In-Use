@@ -1,5 +1,5 @@
 // 
-// big_numbers_add.cpp
+// big_numbers_operation.cpp
 // @ianpasm(kno30826@gmail.com)
 // 2018-03-18 09:26:32
 // 
@@ -41,6 +41,25 @@ bign add(bign a,bign b)
     return c;
 }
 
+bign sub(bign a,bign b)
+{
+    bign c;
+    for (int i = 0; i < a.len || i < b.len; i++)
+    {
+        if (a.d[i] < b.d[i])
+        {
+            a.d[i + 1]--;
+            a.d[i] += 10;
+        }
+        c.d[c.len++] = a.d[i] - b.d[i];
+    }
+    while (c.len - 1 >= 1 && c.d[c.len - 1] == 0)
+    {
+        c.len--;
+    }
+    return c;
+}
+
 void print(bign a)
 {
     for (int i = a.len - 1; i >= 0; i--)
@@ -55,7 +74,11 @@ int main()
     scanf("%s%s",str1,str2);
     bign a = reverse(str1);
     bign b = reverse(str2);
+    printf("The add is :\n");
     print(add(a,b));
+    printf("\n");
+    printf("The sub is :\n");
+    print(sub(a,b));
     return 0;
 }
 
