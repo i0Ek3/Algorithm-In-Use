@@ -59,10 +59,3 @@ while(T--){...} //while(T--)，即给定测试数据的组数，需要用变量T
 * 在使用递增或递减中我们尽量使用前置递增和前置递减来避免不必要的错误
 
 
-### Updates
->2017
->>11-25:Whatever I'll update...add something you can find in the file code/,actually my pc boomed!!!.<br>
->>11-26:Add next chapter learning--sort algorithm!<br>
->>11-27:Add insertSort algorithm.<br>
->>12-05:Add sort contents.<br>
->>[More...](https://github.com/i0Ek3/AlgorithmNotes/blob/master/updates.md)
