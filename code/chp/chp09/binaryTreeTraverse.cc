@@ -82,13 +82,33 @@ void LayerOrder(node* root)
     }
 }
 
-
+//**
 //Given PreOrder and InOrder to rebuild this binarytree.
 node* rebuild(int preL, int preR, int inL, int inR)
 {
-    
-}
+    if (preL > preR)
+    {
+        return NULL;
+    }
 
+    node* root = new node;
+    root->data = pre[preL];
+    
+    int k;
+    for (k = inL; k <= inR; k++) 
+    {
+        if (in[k] == pre[preL])
+        {
+            break;
+        }
+    }
+    int numLeft = k - inL; //lchild numbers
+
+    root->lchild = rebuild(preL + 1, preL + numLeft, inL, k - 1); //lchild
+    root->rchild = rebuild(preL + numLeft + 1, preR, k + 1, inR); //rchild
+
+    return root;
+}
 
 int main()
 {
