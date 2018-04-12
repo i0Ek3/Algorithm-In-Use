@@ -22,7 +22,7 @@
 #include <algorithm>
 using namespace std;
 
-const int maxn = 50;
+const int maxn = 100;
 struct node {
     int data;
     node* lchild;
@@ -52,6 +52,7 @@ node* rebuild(int postL, int postR, int inL, int inR)
     int numbers = k - inL;
     root->lchild = rebuild(postL, postL + numbers - 1, inL, k - 1);
     root->rchild = rebuild(postL + numbers, postR - 1, k + 1, inR);
+    return root;
 }
 
 int num = 0; //already output node numbers
