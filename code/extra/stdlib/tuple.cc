@@ -32,8 +32,8 @@ int main()
 
     //if you don't know the tuple's type details exactly, maybe you should use assiant template to ensure that.
     typedef decltype(item) trans;
-    size_t sz = tuple_size<trans>::value;
-    tuple_element<l, trans>::type cnt = get<1>(item);
+    size_t sz = std::tuple_size<trans>::value;
+    std::tuple_element<l, trans>::type cnt = get<1>(item);
 
     //you just can compare the same type and numbers of tuple
     tuple<string, string> a("1", "3");
