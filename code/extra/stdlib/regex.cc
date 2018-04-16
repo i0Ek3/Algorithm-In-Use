@@ -38,6 +38,25 @@ void match_alpha()
         cout << results.str() << endl;
 }
 
+
+void match_alpha2()
+{
+    string pattern("[^c]ei"); //search pattern
+    
+    //includes whole words of pattern support
+    //[[:alpha:]]* match zero or more alpha
+    //means match words like this:   ******[^c]ei********
+    pattern = "[[:alpha:]]*" + pattern + "[[:alpha:]]*"; 
+    regex r(pattern, regex::icase); //construct regex
+    
+    string file = "receipt freind theif receive"; //search case
+    //multi calling regex_search to find all matches on the file
+    for (sregex_iterator it(file.begin(), file.end(), r), end_it; it != end_it; ++it)
+    {
+        cout << it->str() << endl;
+    }
+}
+
 void icase()
 {
     //match ignore case files' expand name
@@ -79,6 +98,11 @@ void retype()
     }
 }
 
+void reiterator()
+{
+    
+}
+
 
 int main()
 {
@@ -89,6 +113,10 @@ int main()
     try_exception();
     cout << "=====================" << endl;
     retype();
+
+    cout << "=====================" << endl;
+
+    match_alpha2();
 
     return 0;
 }
