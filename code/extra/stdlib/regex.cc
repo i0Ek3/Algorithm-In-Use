@@ -19,7 +19,16 @@
 #include <iostream>
 #include <regex>
 #include <string>
-using namespace std;
+using std::string;
+using std::regex;
+using std::sregex_iterator;
+using std::smatch;
+using std::cmatch;
+using std::endl;
+using std::cout;
+using std::cin;
+//using std::regex_constants::format_no_copy;
+using namespace std::regex_constants;
 
 
 void match_alpha()
@@ -81,7 +90,7 @@ void try_exception()
         //if there lack of a ] then result will show you error message
         regex r("[[:alnum:]+\\.(cpp|cxx|cc)$", regex::icase);
     } 
-    catch (regex_error e)
+    catch (std::regex_error e)
     {
         cout << e.what() << "\ncode: " << e.code() << endl;
     }
@@ -98,26 +107,75 @@ void retype()
     }
 }
 
-void reiterator()
+bool valid(const smatch& m)
 {
-    
+    if (m[1].matched)
+    {
+        return m[3].matched && (m[4].matched == 0 || m[4].str() == " ");
+    }
+    else
+    {
+        return !m[3].matched && m[4].str() == m[6].str();
+    }
 }
 
+void checkphonenumber()
+{
+    //To match America phone number type like this: 
+    //  123 123 1234 
+    //  123-123-1234
+    //
+    string phone = "(\\()?(\\d{3})(\\))?([-. ])?(\\d{3})([-. ]?)(\\d{4})";
+    regex r(phone);
+    smatch m;
+    string s;
+    while (getline(cin, s))
+    {
+        for (sregex_iterator it(s.begin(), s.end(), r), end_it; it != end_it; ++it)
+        {
+            if (valid(*it))
+            {
+                cout << "valid: " << it->str() << endl;
+            }
+            else
+            {
+                cout << "not valid: " << it->str() << endl;
+            }
+        }
+    }
+}
+
+void replacere()
+{
+    string fmt = "$2.$5.$7";
+    string s;
+    string phone = "(\\()?(\\d{3})(\\))?([-. ])?(\\d{3})([-. ]?)(\\d{4})";
+    regex r(phone);
+    
+    while (getline(cin, s))
+    {
+        cout << "The original number is : " << s << endl;
+        //cout << "After replaced: " << regex_replace(s, r, fmt) << endl;
+        cout << regex_replace(s, r, fmt, format_no_copy) << endl;
+    }
+}
 
 int main()
 {
-    match_alpha();
+    //match_alpha();
     cout << "=====================" << endl;
     //icase();
     cout << "=====================" << endl;
-    try_exception();
+    //try_exception();
     cout << "=====================" << endl;
-    retype();
+    //retype();
 
     cout << "=====================" << endl;
 
-    match_alpha2();
-
+    //match_alpha2();
+    //checkphonenumber();
+    
+    replacere();
     return 0;
 }
 
