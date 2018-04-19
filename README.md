@@ -1,14 +1,11 @@
 ## AlgorithmNotes
 
-Personal learning Algorithm notes.Instances with .cpp or .c files.
+Personal learning Algorithm notes.Instances with .cpp|.cc or .c files.
 
-## Plan
+## Coding training
 - [leetcode](https://leetcode.com/problemset/all/)
+- [lintcode](http://www.lintcode.com)
 
-## Instances
-
-|---|-------|----|
-|---|-------|----|
 
 ### 符号常量
 ```C
