@@ -86,6 +86,28 @@ void addElement(int x)
     upAdjust(1, n);
 }
 
+//we talk about case in increasing sequence
+void heapSort1()
+{
+    createHeap();
+    for (int i = n; i > 1; i--)
+    {
+        swap(heap[i], heap[1]);
+        downAdjust(1, i-1);
+    }
+}
+
+//decrease sequence
+void heapSort2()
+{
+    createHeap();
+    for (int i = 0; i < n; i++)
+    {
+        swap(heap[1], heap[i]);
+        upAdjust(1, i-1);
+    }
+}
+
 
 int main()
 {
