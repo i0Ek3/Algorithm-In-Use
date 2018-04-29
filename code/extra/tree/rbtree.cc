@@ -40,15 +40,119 @@ using std::endl;
 class RBTree 
 {
 
+private:
+    //I dont know what are you doing!
+    //Who can explain?
+    typedef enum {
+        E_TREE_BLACK,
+        E_TREE_RED,
+        E_TREE_COLOR_MAX
+    }ETreeColor;
+
+    const static char *s_pszColor[E_TREE_COLOR_MAX];
+    
+    typedef struct __TreeNode {
+        __TreeNode* pParent;
+        __TreeNode* pLeft;
+        __TreeNode* pRight;
+        ETreeColor eColor;
+        int nValue;
+    }TreeNode, *PTreeNode;
+
+public:
+    RBTree();
+    ~RBTree();
+    void InsertData(int nValue);
+    bool Empty();
+    bool GetMax(PTreeNode pNode, int &nMax);
+    bool GetMin(PTreeNode pNode, int &nMin);
+    void DeleteElement(int nDelete);
+    bool FindElement(int nFindValue);
+    void BFS();
+
+private:
+    void InsertedFixUp(PTreeNode pInsertNode); //fixed up tree after insert node
+    void DeletedFixUp(PTreeNode pFixNode); //fixed up tree after delete node
+    void SingleLeftRoation(PTreeNode &pNode, PTreeNode &newTop); //LR then return newTop
+    void SingleRightRoation(PTreeNode &pNode, PTreeNode &newTop); //RR then return newTop
+    void ReplaceParent(PTreeNode pBeReplaceNode, PTreeNode pReplaceNode); //replace the pReplaceNode's father to pBeReplaceNode
+    bool GetMinNode(PTreeNode pNode, PTreeNode &pMinNode); 
+
+private:
+    PTreeNode m_pRoot; //the pointer to root
+    PTreeNode m_pNil; //null node
 
 };
 
 
 //RBTree specific implement
+RBTree::RBTree() {}
+RBTree::~RBTree() {}
 
+void RBTree::InsertData(int nValue)
+{
 
+}
 
+bool RBTree::Empty()
+{
 
+}
+
+bool RBTree::GetMax(PTreeNode pNode, int &nMax)
+{
+
+}
+
+bool RBTree::GetMin(PTreeNode pNode, int &nMin)
+{
+
+}
+
+void RBTree::DeleteElement(int nDelete)
+{
+
+}
+
+bool RBTree::FindElement(int nFindValue)
+{
+
+}
+
+void RBTree::BFS()
+{
+
+}
+
+void RBTree::InsertedFixUp(PTreeNode pInsertNode)
+{
+
+}
+
+void RBTree::DeletedFixUp(PTreeNode pFixNode)
+{
+
+}
+
+void RBTree::SingleLeftRoation(PTreeNode &pNode, PTreeNode &newTop)
+{
+
+}
+
+void RBTree::SingleRightRoation(PTreeNode &pNode, PTreeNode &newTop)
+{
+
+}
+
+void RBTree::ReplaceParent(PTreeNode pBeReplaceNode, PTreeNode pReplaceNode)
+{
+
+}
+
+bool RBTree::GetMinNode(PTreeNode pNode, PTreeNode &pMinNode)
+{
+
+}
 
 
 //Test
