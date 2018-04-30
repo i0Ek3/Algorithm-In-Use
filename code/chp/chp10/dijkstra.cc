@@ -11,6 +11,67 @@
 //  @Thought
 //      Defined a set s to save visited top for G(V, E)
 //      Then choose the smallest distance node u add to s 
+// 
+//  @Questions
+//      1. Add new weight of line
+//
+//          for (int v = 0; v < n; v++)
+//          {
+//              if (vis[v] == false && G[u][v] != INF)
+//              {
+//                  if (d[u] + G[u][v] < d[v])
+//                  {
+//                      d[v] = d[u] + G[u][v];
+//                      c[v] = c[u] + cost[u][v]; //cost[u][v] is u->v's cost
+//                  }
+//                  else if (d[u] + G[u][v] == d[v] && c[u] + cost[u][v] < c[v])
+//                  {
+//                      c[v] = c[u] + cost[u][v];
+//                  }
+//              }
+//          }
+//
+//      2. Add new weight of point
+//
+//          for (int v = 0; v < n; v++)
+//          {
+//              if (vis[v] == false && G[u][v] != INF)
+//              {
+//                  if (d[u] + G[u][v] < d[v])
+//                  {
+//                      d[v] = d[u] + G[u][v];
+//                      w[v] = w[u] + weight[u][v]; 
+//                  }
+//                  else if (d[u] + G[u][v] == d[v] && w[u] + weight[u][v] < w[v])
+//                  {
+//                      w[v] = w[u] + weight[u][v];
+//                  }
+//              }
+//          }
+//          
+//
+//      3. Ask the numbers of the shortest path(s)
+//
+//          for (int v = 0; v < n; v++)
+//          {
+//              if (vis[v] == false && G[u][v] != INF)
+//              {
+//                  if (d[u] + G[u][v] < d[v])
+//                  {
+//                      d[v] = d[u] + G[u][v];
+//                      num[v] = num[u];
+//                  }
+//                  else if (d[u] + G[u][v] == d[v])
+//                  {
+//                      num[v] += num[u];
+//                  }
+//              }
+//          }
+//          
+//
+//
+//
+//
 //
 //
 
@@ -27,7 +88,7 @@ struct Node
 int n; //numbers of top
 const int MAXV = 1000;
 const int INF = 1000000000;
-int G[MAXV][MAXV], d[MAXV];
+int G[MAXV][MAXV], d[MAXV], pre[MAXV];
 bool vis[MAXV] = {false};
 std::vector<Node> Adj[MAXV];
 
@@ -35,6 +96,11 @@ std::vector<Node> Adj[MAXV];
 void DijkstraM(int s)
 {
     std::fill(d, d + MAXV, INF); //intial
+    for (int i = 0; i < n; i++)
+    {
+        pre[i] = i;
+    }
+
     d[s] = 0;
     
     for (int i = 0; i < n; i++)
@@ -63,11 +129,23 @@ void DijkstraM(int s)
             if (vis[v] == false && G[u][v] != INF && d[u] + G[u][v] < d[v])
             {
                 d[v] = d[u] + G[u][v];
+                pre[v] = u;
             }
         }
     }
 }
 
+//output path 
+void DFS(int s, int v)
+{
+    if (v == s)
+    {
+        printf("%d\n", s);
+        return;
+    }
+    DFS(s, pre[v]);
+    printf("%d->", v);
+}
 
 //Adjacent Link
 void DijkstraL(int s)
