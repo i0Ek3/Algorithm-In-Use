@@ -12,8 +12,8 @@
 //  The ways of storage for graph are two: one is adjacency matrix, other is adjancency link.
 //
 // @Traverse for Graph
-//  BFS
-//  DFS
+//      BFS
+//      DFS
 //
 
 
@@ -35,15 +35,20 @@
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
+#include <queue>
+using std::queue;
 using std::vector;
 
 const int MAXV = 1000;
 const int INF = 1000000000;
 int n, G[MAXV][MAXV]; 
-bool visit[MAXV] = {false};
+bool visit[MAXV] = {false}; //judge current node whether is visited
+bool inqueue[MAXV] = {false}; //judge current node whether in queue
 vector<int> Adj[MAXV];
+queue<int> q;
 
 
+//DFS
 //1. Adjacency matrix
 void DFS4matrix(int u, int depth) //u is current visit top-node's id
 {
@@ -90,6 +95,69 @@ void DFSTrave4link()
         if (visit[u] == false)
         {
             DFS4link(u, 1);
+        }
+    }
+}
+
+
+//BFS
+//1. Adjacency matrix
+void BFS4matrix(int u)
+{
+    q.push(u);
+    inqueue[u] = true;
+    while (!q.empty())
+    {
+        int u = q.front();
+        q.pop();
+        for (int v = 0; v < n; v++)
+        {
+            if (inqueue[v] == false && G[u][v] != INF)
+            {
+                q.push(v);
+                inqueue[v] = true;
+            }
+        }
+    }
+}
+
+void BFSTrave4matrix()
+{
+    for (int u = 0; u < n; u++)
+    {
+        if (inqueue[u] == false)
+        {
+            BFS4matrix(q);
+        }
+    }
+}
+
+//2. Adjacency link
+void BFS4link(int u)
+{
+    while (!q.empty())
+    {
+        int u = q.front();
+        q.pop();
+        for (int i = 0; i < Adj[u].size(); i++)
+        {
+            int v = Adj[u][i];
+            if (inqueue[v] == false)
+            {
+                q.push(v);
+                inqueue[v] = true;
+            }    
+        }
+    }
+}
+
+void BFSTrave4link()
+{
+    for (int u = 0; u < n; u++)
+    {
+        if (inqueue[u] == false)
+        {
+            BFS4link(q);
         }
     }
 }
