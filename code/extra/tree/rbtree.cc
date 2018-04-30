@@ -86,8 +86,52 @@ private:
 
 
 //RBTree specific implement
-RBTree::RBTree() {}
-RBTree::~RBTree() {}
+
+RBTree::RBTree() 
+{
+	//null rbtree
+	m_pRoot = nullptr;
+	m_pNil = new TreeNode();
+	m_pNil->pLeft = nullptr;
+	m_pNil->pRight = nullptr;
+	m_pNil->pParent = nullptr;
+	m_pNil->eColor = E_TREE_BLACK;
+	m_pNil->nValue = 0xFFFFFFFF;
+}
+
+RBTree::~RBTree() 
+{
+	if (!Empty())
+	{
+		queue<PTreeNode> nodeQue;
+		nodeQue.push(m_pRoot);
+		while (!nodeQue.empty())
+		{
+			PTreeNode pNode = nodeQue.front();
+			PTreeNode pLeft = pNode->pLeft;
+			PTreeNode pRight= pNode->pRight;
+			nodeQue.pop();
+			delete pNode;
+
+			if (pLeft != m_pNil)
+			{
+				nodeQue.push(pLeft);
+			}
+
+			if (pRight != m_pNil)
+			{
+				nodeQue.push(pRight);
+			}
+		}
+	}
+
+	if (m_pNil)
+	{
+		//free space
+		delete m_pNil;
+		m_pNil = nullptr;
+	}
+}
 
 void RBTree::InsertData(int nValue)
 {
@@ -96,17 +140,37 @@ void RBTree::InsertData(int nValue)
 
 bool RBTree::Empty()
 {
-
+	return nullptr == m_pRoot;
 }
 
 bool RBTree::GetMax(PTreeNode pNode, int &nMax)
 {
+	if (nullptr == pNode)
+	{
+		return false;
+	}
 
+	while (pNode)
+	{
+		nMax = pNode->nValue;
+		pNode = pNode->pRight;
+	}
+	return true;
 }
 
 bool RBTree::GetMin(PTreeNode pNode, int &nMin)
 {
+	if (nullptr == pNode)
+	{
+		return false;
+	}
 
+	while (pNode)
+	{
+		nMin = pNode->nValue;
+		pNode = pNode->pLeft;
+	}
+	return true;
 }
 
 void RBTree::DeleteElement(int nDelete)
@@ -116,7 +180,29 @@ void RBTree::DeleteElement(int nDelete)
 
 bool RBTree::FindElement(int nFindValue)
 {
+	if (Empty())
+	{
+		return false;
+	}
 
+	PTreeNode pCurrent = m_pRoot;
+	while (m_pNil != pCurrent)
+	{
+		//left small, right big
+		if (nFindValue < pCurrent->nValue)
+		{
+			pCurrent = pCurrent->pLeft;
+		}
+		else if (nFindValue > pCurrent->nValue)
+		{
+			pCurrent = pCurrent->pRight;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	return true;
 }
 
 void RBTree::BFS()
@@ -151,7 +237,18 @@ void RBTree::ReplaceParent(PTreeNode pBeReplaceNode, PTreeNode pReplaceNode)
 
 bool RBTree::GetMinNode(PTreeNode pNode, PTreeNode &pMinNode)
 {
-
+	if (nullptr == pNode || pNode == m_pNil)
+	{
+		return false;
+	}
+	PTreeNode pPreNode = pNode->pParent;
+	while (m_pNil != pNode)
+	{
+		pPreNode = pNode;
+		pNode = pNode->pLeft;
+	}
+	pMinNode = pPreNode;
+	return true;
 }
 
 
