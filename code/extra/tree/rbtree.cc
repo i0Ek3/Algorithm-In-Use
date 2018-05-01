@@ -135,7 +135,52 @@ RBTree::~RBTree()
 
 void RBTree::InsertData(int nValue)
 {
+    //if there is no node we should create one node then insert data
+    if (Empty())
+    {
+        m_pRoot = new TreeNode();
+        m_pRoot->eColor = E_TREE_BLACK;
+        m_pRoot->nValue = nValue;
+        m_pRoot->pLeft = m_pNil;
+        m_pRoot->pRight = m_pNil;
+        m_pRoot->pParent = m_pNil;
+        return;
+    }
+    
+    //find the place to insert
+    PTreeNode pPreNode = m_pRoot->pParent;
+    PTreeNode pCurrent = m_pRoot;
+    while (m_pNil != pCurrent)
+    {
+        pPreNode = pCurrent;
+        if (nValue <= pCurrent->nValue)
+        {
+            pCurrent = pCurrent->pLeft;
+        }
+        else
+        {
+            pCurrent = pCurrent->pRight;
+        }
+    }
 
+    //insert data into right place
+    PTreeNode pInsertNode = new TreeNode();
+    pInsertNode->eColor = E_TREE_RED;
+    pInsertNode->nValue = nValue;
+    pInsertNode->pLeft = m_pNil;
+    pInsertNode->pRight = m_pNil;
+    pInsertNode->pParent = pPreNode;
+    if (nValue <= pPreNode->nValue)
+    {
+        pPreNode->pLeft = pInsertNode;
+    }
+    else
+    {
+        pPreNode->pRight = pInsertNode;
+    }
+
+    //start fixed up the rbtree from the insert place 
+    InsertedFixUp(pInsertNode);
 }
 
 bool RBTree::Empty()
@@ -175,7 +220,96 @@ bool RBTree::GetMin(PTreeNode pNode, int &nMin)
 
 void RBTree::DeleteElement(int nDelete)
 {
+    if (Empty())
+    {
+        return;
+    }
 
+    //find the node which should be deleted 
+    PTreeNode pCurrent = m_pRoot;
+    PTreeNode pNeedDeleteNode = nullptr;
+    while (m_pNil != pCurrent)
+    {
+        if (nDelete < pCurrent->nValue)
+        {
+            pCurrent = pCurrent->pLeft;
+        }
+        else if (nDelete > pCurrent->nValue)
+        {
+            pCurrent = pCurrent->pRight;
+        }
+        else
+        {
+            pNeedDeleteNode = pCurrent;
+            break;
+        }
+    }
+
+    if (nullptr == pNeedDeleteNode)
+    {
+        return;
+    }
+
+    //execute delete
+    PTreeNode pRealDeleteNode = nullptr;
+    PTreeNode pFixUpNode = nullptr;
+    ETreeColor eRealDeleteColor = E_TREE_COLOR_MAX;
+
+    //if the left subtree is null
+    if (m_pNil == pNeedDeleteNode->pLeft)
+    {
+        pRealDeleteNode = pNeedDeleteNode;
+        eRealDeleteColor = pRealDeleteNode->eColor;
+        pFixUpNode = pRealDeleteNode->pRight;
+        ReplaceParent(pRealDeleteNode, pRealDeleteNode->pRight);
+    }
+    else if (m_pNil == pNeedDeleteNode->pRight) //if the right subtree is null
+    {
+        pRealDeleteNode = pNeedDeleteNode;
+        eRealDeleteColor = pRealDeleteNode->eColor;
+        pFixUpNode = pRealDeleteNode->pLeft;
+        ReplaceParent(pRealDeleteNode, pRealDeleteNode->pLeft);
+    }
+    else // ???  none of left and right subtrees are null
+    {
+        // what talking about???
+        bool bGetMinRet = GetMinNode(pNeedDeleteNode->pRight, pRealDeleteNode);
+        assert(bGetMinRet);
+        assert(pRealDeleteNode != m_pNil);
+        eRealDeleteColor = pRealDeleteNode->eColor;
+        pFixUpNode = pRealDeleteNode->pRight;
+
+        //There are two cases to consider
+        //case one:
+        if (pRealDeleteNode->pParent == pNeedDeleteNode)
+        {
+            pFixUpNode->pParent = pRealDeleteNode;
+        }
+        else //case two:
+        {
+            ReplaceParent(pRealDeleteNode, pRealDeleteNode->pRight);
+            pRealDeleteNode->pRight = pNeedDeleteNode->pRight;
+            pRealDeleteNode->pRight->pParent = pRealDeleteNode;
+        }
+
+        ReplaceParent(pNeedDeleteNode, pRealDeleteNode);
+        pRealDeleteNode->pLeft = pNeedDeleteNode->pLeft;
+        pRealDeleteNode->pLeft->pParent = pRealDeleteNode;
+        pRealDeleteNode->eColor = pNeedDeleteNode->eColor;
+    }
+
+    //execute fixed up at point pFixUpNode
+    if (E_TREE_BLACK == eRealDeleteColor)
+    {
+        DeletedFixUp(pFixUpNode);
+    }
+
+    if (m_pRoot ==  m_pNil)
+    {
+        m_pRoot = nullptr;
+    }
+
+    delete pNeedDeleteNode; //cleaned up the node which is deleted 
 }
 
 bool RBTree::FindElement(int nFindValue)
@@ -222,17 +356,80 @@ void RBTree::DeletedFixUp(PTreeNode pFixNode)
 
 void RBTree::SingleLeftRoation(PTreeNode &pNode, PTreeNode &newTop)
 {
+    /*
+     *      k2                k1
+     *        \              /  \
+     *         k1           k2   N
+     *          \
+     *           N
+     */           
 
+    PTreeNode k2 = pNode;
+    PTreeNode k1 = pNode->pRight;
+    k2->pRight = k1->pLeft;  //?
+    
+    //change the k1 lchild's father node
+    if (k1->pLeft)
+    {
+        k1->pLeft->pParent = k2;
+    }
+    k1->pLeft = k2;
+
+    //change the k1's father node 
+    k1->pParent = pNode->pParent;
+
+    //change the k2's father node 
+    k2->pParent = k1;
+
+    //change the k1's father node's lchild and rchild
+    pNode = k1;
+    newTop = k1;
 }
 
 void RBTree::SingleRightRoation(PTreeNode &pNode, PTreeNode &newTop)
 {
+    /*
+     *         k2                k1
+     *        /                 /  \
+     *      k1                 N    k2
+     *     /
+     *    N
+     */    
+        
+    PTreeNode k2 = pNode;
+    PTreeNode k1 = pNode->pLeft;
+    k2->pLeft = k1->pRight;
 
+    //change the k1 rchild's father node 
+    if (k1->pRight)
+    {
+        k1->pRight->pParent = k2;
+    }
+    k1->pRight = k2;
+    k1->pParent = pNode->pParent;
+    k2->pParent = k1;
+    pNode = k1;
+    newTop = k1;
 }
 
 void RBTree::ReplaceParent(PTreeNode pBeReplaceNode, PTreeNode pReplaceNode)
 {
+    //if the pBeReplaceNode is root node
+    if (pBeReplaceNode == m_pRoot)
+    {
+        m_pRoot = pReplaceNode;
+    }
+    else if (pBeReplaceNode == pBeReplaceNode->pParent->pLeft) //if the pBeReplaceNode is father node's left child
+    {
+        pBeReplaceNode->pParent->pLeft = pBeReplaceNode;
+    }
+    else if (pBeReplaceNode == pBeReplaceNode->pParent->pRight) //if the pBeReplaceNode is father node's right child
+    {
+        pBeReplaceNode->pParent->pRight = pBeReplaceNode;
+    }
 
+    //change the father node of pReplaceNode 
+    pReplaceNode->pParent = pBeReplaceNode->pParent;
 }
 
 bool RBTree::GetMinNode(PTreeNode pNode, PTreeNode &pMinNode)
