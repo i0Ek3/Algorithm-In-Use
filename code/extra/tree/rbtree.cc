@@ -341,7 +341,56 @@ bool RBTree::FindElement(int nFindValue)
 
 void RBTree::BFS()
 {
+    if (Empty())
+    {
+        return;
+    }
+    queue<PTreeNode> nodeQue;
+    nodeQue.push(m_pRoot);
 
+    //the current level of the tree
+    int nHeight = 0;
+    while (!nodeQue.empty())
+    {
+        int nCurrentLevelSize = nodeQue.size();
+        int nCnt = 0;
+        cout << "This is " << nHeight + 1 << "th level.";
+        while (nCnt < nCurrentLevelSize)
+        {
+            PTreeNode accessNode = nodeQue.front();
+            nodeQue.pop();
+            if (accessNode == m_pRoot)
+            {
+                cout << accessNode->nValue << "(root, color:" << s_pszColor[accessNode->eColor] << ")" << " ";
+            }
+            else
+            {
+                if (accessNode->pParent->pLeft == accessNode)
+                {
+                    cout << "[(" << accessNode->nValue << "color:" << s_pszColor[accessNode->eColor] << ")" << "(" << accessNode->pParent->nValue << "'s lchild)]" << " ";
+                }
+                else if (accessNode->pParent->pRight == accessNode)
+                {
+                    cout << "[(" << accessNode->nValue << "color:" << s_pszColor[accessNode->eColor] << ")" << "(" << accessNode->pParent->nValue << "'s rchild)]" << " ";
+                }
+            }
+
+            PTreeNode pLeft = accessNode->pLeft;
+            PTreeNode pRight= accessNode->pRight;
+            if (pLeft != m_pNil)
+            {
+                nodeQue.push(pLeft);
+            }
+            if (pRight != m_pNil)
+            {
+                nodeQue.push(pRight);
+            }
+            ++nCnt;
+        }
+        nHeight++;
+        cout << endl;
+    }
+    cout << endl;
 }
 
 void RBTree::InsertedFixUp(PTreeNode pInsertNode)
