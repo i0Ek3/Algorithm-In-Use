@@ -86,6 +86,7 @@ private:
 
 
 //RBTree specific implement
+const char * RBTree::s_pszColor[E_TREE_COLOR_MAX] = {"Black", "Red"};
 
 RBTree::RBTree() 
 {
@@ -395,12 +396,219 @@ void RBTree::BFS()
 
 void RBTree::InsertedFixUp(PTreeNode pInsertNode)
 {
-
+    PTreeNode pFixNode = pInsertNode;
+    while (E_TREE_RED == pFixNode->pParent->eColor)
+    {
+        if (pFixNode->pParent == pFixNode->pParent->pParent->pLeft)
+        {
+            PTreeNode pUncle = pFixNode->pParent->pParent->pRight;
+            if (E_TREE_RED == pUncle->eColor)
+            {
+                pFixNode->pParent->eColor = E_TREE_BLACK;
+                pUncle->eColor = E_TREE_BLACK;
+                pFixNode->pParent->pParent->eColor = E_TREE_RED;
+                pFixNode = pFixNode->pParent->pParent;
+            }
+            else if (pFixNode == pFixNode->pParent->pRight)
+            {
+                pFixNode = pFixNode->pParent;
+                PTreeNode pNewTop = nullptr;
+                SingleLeftRoation(pFixNode->pParent->pLeft, pNewTop);
+                pFixNode = pNewTop->pLeft;
+            }
+            else if (pFixNode == pFixNode->pParent->pLeft)
+            {
+                pFixNode->pParent->eColor = E_TREE_BLACK;
+                pFixNode->pParent->pParent->eColor = E_TREE_RED;
+                pFixNode = pFixNode->pParent->pParent;
+                PTreeNode pNewTop = nullptr;
+                if (m_pRoot == pFixNode)
+                {
+                    SingleRightRoation(m_pRoot, pNewTop);
+                }
+                else if (pFixNode == pFixNode->pParent->pLeft)
+                {
+                    SingleRightRoation(pFixNode->pParent->pLeft, pNewTop);
+                }
+                else if (pFixNode == pFixNode->pParent->pRight)
+                {
+                    SingleRightRoation(pFixNode->pParent->pRight, pNewTop);
+                }
+                pFixNode = pNewTop->pLeft;
+            }
+        }
+        else if (pFixNode->pParent == pFixNode->pParent->pParent->pRight)
+        {
+            PTreeNode pUncle = pFixNode->pParent->pParent->pLeft;
+            if (E_TREE_RED == pUncle->eColor)
+            {
+                pFixNode->pParent->eColor = E_TREE_BLACK;
+                pUncle->eColor = E_TREE_BLACK;
+                pFixNode->pParent->pParent->eColor = E_TREE_RED;
+                pFixNode = pFixNode->pParent->pParent;
+            }
+            else if (pFixNode == pFixNode->pParent->pLeft)
+            {
+                pFixNode = pFixNode->pParent;
+                PTreeNode pNewTop = nullptr;
+                SingleRightRoation(pFixNode->pParent->pRight, pNewTop);
+                pFixNode = pNewTop->pRight;
+            }
+            else if (pFixNode == pFixNode->pParent->pRight)
+            {
+                pFixNode->pParent->eColor = E_TREE_BLACK;
+                pFixNode->pParent->pParent->eColor = E_TREE_RED;
+                pFixNode = pFixNode->pParent->pParent;
+                PTreeNode pNewTop = nullptr;
+                if (m_pRoot == pFixNode)
+                {
+                    SingleLeftRoation(m_pRoot, pNewTop);
+                }
+                else if (pFixNode == pFixNode->pParent->pLeft)
+                {
+                    SingleLeftRoation(pFixNode->pParent->pLeft, pNewTop);
+                }
+                else if (pFixNode == pFixNode->pParent->pRight)
+                {
+                    SingleLeftRoation(pFixNode->pParent->pRight, pNewTop);
+                }
+                pFixNode = pNewTop->pRight;
+            }
+        }
+    }
+    m_pRoot->eColor = E_TREE_BLACK;
 }
 
 void RBTree::DeletedFixUp(PTreeNode pFixNode)
 {
-
+    while (pFixNode != m_pRoot && E_TREE_BLACK == pFixNode->eColor)
+    {
+        if (pFixNode == pFixNode->pParent->pLeft)
+        {
+            PTreeNode pBroNode = pFixNode->pParent->pRight;
+            if (E_TREE_RED == pBroNode->eColor)
+            {
+                pBroNode->eColor = E_TREE_BLACK;
+                pFixNode->pParent->eColor = E_TREE_RED;
+                PTreeNode pPivot = pFixNode->pParent;
+                PTreeNode pNewTop = nullptr;
+                PTreeNode pBackParent = pFixNode->pParent;
+                if (m_pRoot == pPivot)
+                {
+                    SingleLeftRoation(m_pRoot, pNewTop);
+                }
+                else if (pPivot == pPivot->pParent->pLeft)
+                {
+                    SingleLeftRoation(pPivot->pParent->pLeft, pNewTop);
+                }
+                else if (pPivot == pPivot->pParent->pRight)
+                {
+                    SingleLeftRoation(pPivot->pParent->pRight, pNewTop);
+                }
+                pFixNode->pParent = pBackParent;
+            }
+            else if (E_TREE_BLACK == pBroNode->pLeft->eColor && E_TREE_BLACK == pBroNode->pRight->eColor)
+            {
+                pBroNode->eColor = E_TREE_RED;
+                pFixNode = pFixNode->pParent;
+            }
+            else if (E_TREE_RED == pBroNode->pLeft->eColor && E_TREE_BLACK == pBroNode->pRight->eColor)
+            {
+                ETreeColor eNodeThrColor = pBroNode->pLeft->eColor;
+                ETreeColor eNodeBroColor = pBroNode->eColor;
+                pBroNode->pLeft->eColor = eNodeBroColor;
+                pBroNode->eColor = eNodeThrColor;
+                PTreeNode pBackParent = pFixNode->pParent;
+                PTreeNode pNewTop = nullptr;
+                SingleRightRoation(pBroNode->pParent->pRight, pNewTop);
+                pFixNode->pParent = pBackParent;
+            }
+            else if (E_TREE_RED == pBroNode->pRight->eColor)
+            {
+                pBroNode->eColor = pFixNode->pParent->eColor;
+                pFixNode->pParent->eColor = E_TREE_BLACK;
+                pBroNode->pRight->eColor = E_TREE_BLACK;
+                PTreeNode pPivot = pFixNode->pParent;
+                PTreeNode pNewTop = nullptr;
+                if (m_pRoot == pPivot)
+                {
+                    SingleLeftRoation(pPivot, pNewTop);
+                }
+                else if (pPivot == pPivot->pParent->pLeft)
+                {
+                    SingleLeftRoation(pPivot->pParent->pLeft, pNewTop);
+                }
+                else if (pPivot == pPivot->pParent->pRight)
+                {
+                    SingleLeftRoation(pPivot->pParent->pRight, pNewTop);
+                }
+                pFixNode = m_pRoot;
+            }
+        }
+        else if (pFixNode == pFixNode->pParent->pRight)
+        {
+            PTreeNode pBroNode = pFixNode->pParent->pLeft;
+            if (E_TREE_RED == pBroNode->eColor)
+            {
+                pBroNode->eColor = E_TREE_BLACK;
+                pFixNode->pParent->eColor = E_TREE_RED;
+                PTreeNode pPivot = pFixNode->pParent;
+                PTreeNode pNewTop = nullptr;
+                PTreeNode pBackParent = pFixNode->pParent;
+                if (m_pRoot == pPivot)
+                {
+                    SingleRightRoation(m_pRoot, pNewTop);
+                }
+                else if (pPivot == pPivot->pParent->pLeft)
+                {
+                    SingleRightRoation(pPivot->pParent->pLeft, pNewTop);
+                }
+                else if (pPivot == pPivot->pParent->pRight)
+                {
+                    SingleRightRoation(pPivot->pParent->pRight, pNewTop);
+                }
+                pFixNode->pParent = pBackParent;
+            }
+            else if (E_TREE_BLACK == pBroNode->pLeft->eColor && E_TREE_BLACK == pBroNode->pRight->eColor)
+            {
+                pBroNode->eColor = E_TREE_RED;
+                pFixNode = pFixNode->pParent;
+            }
+            else if (E_TREE_BLACK == pBroNode->pLeft->eColor && E_TREE_RED == pBroNode->pRight->eColor)
+            {
+                ETreeColor eNodeThrColor = pBroNode->pRight->eColor;
+                ETreeColor eNodeBroColor = pBroNode->eColor;
+                pBroNode->pRight->eColor = eNodeBroColor;
+                pBroNode->eColor = eNodeThrColor;
+                PTreeNode pBackParent = pFixNode->pParent;
+                PTreeNode pNewTop = nullptr;
+                SingleLeftRoation(pBroNode->pParent->pLeft, pNewTop);
+                pFixNode->pParent = pBackParent;
+            }
+            else if (E_TREE_RED == pBroNode->pLeft->eColor)
+            {
+                pBroNode->eColor = pFixNode->pParent->eColor;
+                pFixNode->pParent->eColor = E_TREE_BLACK;
+                pBroNode->pLeft->eColor = E_TREE_BLACK;
+                PTreeNode pPivot = pFixNode->pParent;
+                PTreeNode pNewTop = nullptr;
+                if (m_pRoot == pPivot)
+                {
+                    SingleRightRoation(pPivot, pNewTop);
+                }
+                else if (pPivot == pPivot->pParent->pLeft)
+                {
+                    SingleRightRoation(pPivot->pParent->pLeft, pNewTop);
+                }
+                else if (pPivot == pPivot->pParent->pRight)
+                {
+                    SingleRightRoation(pPivot->pParent->pRight, pNewTop);
+                }
+                pFixNode = m_pRoot;
+            }
+        }
+    }
+    pFixNode->eColor = E_TREE_BLACK;
 }
 
 void RBTree::SingleLeftRoation(PTreeNode &pNode, PTreeNode &newTop)
@@ -497,11 +705,52 @@ bool RBTree::GetMinNode(PTreeNode pNode, PTreeNode &pMinNode)
 	return true;
 }
 
-
 //Test
-int main()
+int main(int argc, char* argv[])
 {
+    RBTree rbtree;
 
+    //Insert 
+    int nArrayInsertValue[] = {12, 1, 9, 2, 0, 11, 7, 19, 4, 15, 1, 8, 5, 14, 13, 10, 16, 6, 3, 8, 17};
+    for (int i = 0; i < sizeof(nArrayInsertValue) / sizeof(nArrayInsertValue[0]); i++)
+    {
+        rbtree.InsertData(nArrayInsertValue[i]);
+    }
+
+    //BFS
+    rbtree.BFS();
+    cout << endl;
+
+    //Delete
+    for (int i = 0; i < sizeof(nArrayInsertValue)/sizeof(nArrayInsertValue[0]); i++)
+    {
+        cout << "After deleted " << nArrayInsertValue[i] << "'th node" << endl;
+        rbtree.DeleteElement(nArrayInsertValue[i]);
+        rbtree.BFS();
+    }
+
+    //Insert any seq
+    cout << "Insert any sequence..." << endl;
+    for (int i = 0; i < 50; i++)
+    {
+        rbtree.InsertData(i);
+    }
+
+    //Find node 3
+    cout << "Find the node 3..." << endl;
+    cout << "Result: " << rbtree.FindElement(3) << endl;
+
+    rbtree.BFS();
+    cout << endl;
+
+    //Delete any seq just save three
+    for (int i = 49; i >= 3; i--)
+    {
+        rbtree.DeleteElement(i);
+    }
+
+    rbtree.BFS();
+    cout << endl;
 
     return 0;
 }
