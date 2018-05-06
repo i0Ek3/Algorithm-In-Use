@@ -6,23 +6,47 @@
 // @Reb Black Tree 
 //  Ref1: https://bbs.pediy.com/thread-225432.html
 //  Ref2: http://www.sohu.com/a/201923614_466939
+//  Ref3: https://segmentfault.com/a/1190000000472153 
+//  Ref4: https://blog.csdn.net/v_JULY_v/article/details/6114226
+//
 //
 // @Nature
-//  BST's nature (but there is a flaw, it has line performance)
-//  Auto-banlance
-//  Nodes' color is red or black
-//  Root node's color is black
-//  All leaf nodes' color is black and it's value is NULL
-//  All red nodes' two subnodes' color is black, cannot exisit two continuous red nodes
-//  Any nodes come to it's leaf nodes of path which have same numbers black nodes
+//  Roughly,
+//  	BST's nature (but there is a flaw, it has line performance)
+//  	Auto-banlance
+//  	Nodes' color is red or black
+//  	Root node's color is black
+//  	All leaf nodes' color is black and it's value is NULL
+//  	All red nodes' two subnodes' color is black, cannot exisit two continuous red nodes
+//  	Any nodes come to it's leaf nodes of path which have same numbers black nodes
+//  Specially,
+//	1) Every nodes' color are all red or black
+//	2) The root's color is black
+//	3) Every leaf node(NIL node)'s color is black
+//	4) If one node's color is red then it's two childs are all black
+//	5) With every node, same black nodes on the path which to it's grandchild node
+//
+//  @Insert
+//	Whatever which red node will be inserted, nature 2) and 4) will be cracked. 
+//	Solutions:
+//		1) Move up the node which cracked nature then fixed it up
+//		2) Enum all possible then integerity it
+//		   Case:
+//			1) insert node is root
+//			2) insert node's father is black
+//			3) current node's father is red and it's grandfather's other subchild(uncle node) is red
+//			4) current node(rchild)'s father is red and it's uncle node is black,
+//			5) current node(lchild)'s father is red and it's uncle node is black,
+//  
+//  @Delete
+//	The suitation of delete same with delete of binary search tree, but we should consider the case of lost banlance of origin rbtree. 
+//	Case:
+//	     1) No child, a leaf
+//	     2) One child, rchild or lchild
+//	     3) Two child, rchild and lchild
+//
 //
 // @Fix Up
-//  Change the color
-//      Black -> Red
-//      Red -> Black
-//  Roation
-//      LR
-//      RR
 //
 // 
 //
@@ -51,7 +75,7 @@ private:
 
     const static char *s_pszColor[E_TREE_COLOR_MAX];
     
-    typedef struct __TreeNode {
+    typedef struct __TreeNode { //five fields in every node: color, key, left, right, p
         __TreeNode* pParent;
         __TreeNode* pLeft;
         __TreeNode* pRight;
@@ -611,7 +635,9 @@ void RBTree::DeletedFixUp(PTreeNode pFixNode)
     pFixNode->eColor = E_TREE_BLACK;
 }
 
-void RBTree::SingleLeftRoation(PTreeNode &pNode, PTreeNode &newTop)
+// With roation of tree, the nature for search doesn't changed, but not the red or black of tree. 
+// Some cases of double roation of tree just the applys of single roation, without news.
+void RBTree::SingleLeftRoation(PTreeNode &pNode, PTreeNode &newTop) 
 {
     /*
      *      k2                k1
