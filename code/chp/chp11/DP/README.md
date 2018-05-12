@@ -3,27 +3,33 @@
 
 
 # Contents
-- [Dynamic Programming](Dynamic Programming)
-    - [Recursion](Recursion)
-    - [Recurrence](Recurrence)
-- [Sum of Maximum Continuous Subsequence](Sum of Maximum Continuous Subsequence)
-- [Longest Increasing Subsequence-LIS](Longest Increasing Subsequence-LIS)
-- [Longest Common Subsequence-LCS](Longest Common Subsequence-LCS)
-- [Longest Palindrome Substring](Longest Palindrome Substring)
-- [Longest Path of DAG](Longest Path of DAG)
-- [Package Problem](Package Problem)
-    - [Multi Phase DP Problem](Multi Phase DP Problem)
-    - [01 Package](01 Package)
-    - [Fully Package](Fully Package)
+- [1. Dynamic Programming](## 1. Dynamic Programming)
+    - [1.1 Recursion](## 1.1 Recursion)
+    - [1.2 Recurrence](## 1.2 Recurrence)
+- [2. Sum of Maximum Continuous Subsequence](## 2. Sum of Maximum Continuous Subsequence)
+- [3. Longest Increasing Subsequence-LIS](Longest Increasing Subsequence-LIS)
+- [4. Longest Common Subsequence-LCS](Longest Common Subsequence-LCS)
+- [5. Longest Palindrome Substring](Longest Palindrome Substring)
+- [6. Tower of Number in DP](## 6. Tower of Number in DP)
+- [7. Longest Path of DAG](Longest Path of DAG)
+- [8. Package Problem](## 8. Package Problem)
+    - [8.1 Multi Phase DP Problem](## 8.1 Multi Phase DP Problem)
+    - [8.2 01 Package](## 8.2 01 Package)
+    - [8.3 Fully Package](## 8.3 Fully Package)
 
-## Dynamic Programming
 
-## Sum of Maximum Continuous Subsequence
+## 1. Dynamic Programming
 
-## Longest Increasing Subsequence
+## 2. Sum of Maximum Continuous Subsequence
 
-## Longest Common Subsequence
+## 3. Longest Increasing Subsequence
 
-## Longest Palindrome Substring
+## 4. Longest Common Subsequence
 
-## Longest Path of DAG
+## 5. Longest Palindrome Substring
+
+## 6. Tower of Number in DP
+
+## 7. Longest Path of DAG
+
+## 8. Package Problem
