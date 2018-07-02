@@ -22,7 +22,7 @@ The purpose of this project is to enhance the coding ability by algorithm. This 
     - [chp12](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp12?1530413181437)
     - [chp13](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp13?1530413204051)
 
-- [extra](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra?1530411891569)
+- [extra](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra?1530411891569) 这一部分是额外的算法知识，内容来自四面八方。
     - [DP](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/DP?1530412701969)
     - [stdlib](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/stdlib?1530412844797)
     - [template](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/template?1530412872553)
