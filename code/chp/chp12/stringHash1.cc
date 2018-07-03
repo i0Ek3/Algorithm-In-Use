@@ -19,7 +19,7 @@
 using std::string;
 using std::map;
 using std::vector;
-using std::algorithm;
+using std::string;
 using std::cin;
 using std::cout;
 using std::endl;
@@ -29,9 +29,9 @@ const LL MOD = 1e9 + 7;
 const LL P = 1e7 + 19;
 const LL MAXN = 1010;
 LL powP[MAXN], H1[MAXN] = {0}, H2[MAXN] = {0}; //powP[] storage P^i%MOD, H[] storage str's hash
-vector<pair<int, int>> pr1, pr2; //storage the key-value <substr hash, substr length> for str
+vector<std::pair<int, int> > pr1, pr2; //storage the key-value <substr hash, substr length> for str
 
-void init(int len)
+void init(int len) //initialize array powP[]
 {
     powP[0] = 1;
     for (int i = 1; i <= len; i++) {
@@ -39,7 +39,7 @@ void init(int len)
     }
 }
 
-void calHash(LL H[], string &str)
+void calHash(LL H[], string &str) //calculate str's hash
 {
     H[0] = str[0];
     for (int i = 1; i < str.length(); i++) {
@@ -47,7 +47,7 @@ void calHash(LL H[], string &str)
     }
 }
 
-void calSingleSubHash(LL H[], int i, int j)
+int calSingleSubHash(LL H[], int i, int j) //calculate every single substr's hash
 {
     if (i == 0) {
         return H[j];
@@ -55,23 +55,23 @@ void calSingleSubHash(LL H[], int i, int j)
     return ((H[j] - H[i - 1] * powP[j - 1 + i]) % MOD + MOD) % MOD;
 }
 
-void calSubHash(LL H[], int len, vector<pair<int, int>>&pr)
+void calSubHash(LL H[], int len, vector<std::pair<int, int> >&pr) //calculate substr's hash
 {
     for (int i = 0; i < len; i++) {
         for (int j = i; j < len; j++) {
             int hashValue = calSingleSubHash(H, i, j);
-            pr.push_back(make_pair(hashValue, j - i + 1));
+            pr.push_back(std::make_pair(hashValue, j - i + 1));
         }
     }
 }
 
-int getMax()
+int getMax() 
 {
     int ans = 0;
     for (int i = 0; i < pr1.size(); i++) {
         for (int j = 0; j < pr2.size(); j++) {
             if (pr1[i].first == pr2[j].first) {
-                ans = std::max(ans, pr1[i], pr2[j]);
+                ans = std::max(ans, pr1[i].second);
             }
         }
     }
