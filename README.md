@@ -9,27 +9,6 @@ The goal of the project is to improve the actual coding and thinking skills thro
 
 <summary>View Content</summary>
 
-- [chp](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp?1530411862944) 算法笔记的基础章节。
-    - [chp02](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp02?1530412172905) 
-    - [chp03](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp03?1530412209104)
-    - [chp04](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp04)
-    - [chp05](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp05)
-    - [chp06](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp06)
-    - [chp07](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp07)
-    - [chp08](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp08?1530412935628)
-    - [chp09](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp09?1530413069853)
-    - [chp10](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp10?1530413110301)
-    - [chp11](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp11?1530413165158)
-    - [chp12](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp12?1530413181437)
-    - [chp13](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/chp/chp13?1530413204051)
-
-- [extra](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra?1530411891569) 这一部分是额外的算法知识，内容来自四面八方。
-    - [DP](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/DP?1530412701969)
-    - [stdlib](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/stdlib?1530412844797)
-    - [template](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/template?1530412872553)
-    - [tree](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/tree?1530412892159)
-    - [generic](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/generic?1530412748618)
-    - [other](https://github.com/i0Ek3/AlgorithmNotes/tree/master/code/extra/other?1530412823227)
 
 
 </details>
@@ -40,11 +19,15 @@ The goal of the project is to improve the actual coding and thinking skills thro
 
 - Algorithm Notes
 - Introduction to Algorithms
-- And so on... 
+- Aha! Algorithm
+- Algorithm(4 Edition)
+
 
 ## Log
 
-Maybe I should divide the algorithm into different class, such as array, stack, and so on. Maybe later...
+Maybe I should divide the algorithm into different class, such as array, stack, and so on. 
+
+You guessed it, I am doing this, don't go too far!
 
 
 
