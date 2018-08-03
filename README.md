@@ -1,6 +1,7 @@
-# AlgorithmNotes
+# Algorithm In Use
 
-The purpose of this project is to enhance the coding ability by algorithm. This project have two parts as belows, maybe you can find something you need. Enjoy it, if there have any problem please tell me gernously, thanks a lot.
+The goal of the project is to improve the actual coding and thinking skills through algorithmic learning. This project will continue to improve, I hope you can find what you need here. Enjoy it, please let me know if you have any questions, thanks a lot.
+
 
 ## Content
 
@@ -39,5 +40,12 @@ The purpose of this project is to enhance the coding ability by algorithm. This 
 
 - Algorithm Notes
 - Introduction to Algorithms
+- And so on... 
+
+## Log
+
+Maybe I should divide the algorithm into different class, such as array, stack, and so on. Maybe later...
+
+
 
 
