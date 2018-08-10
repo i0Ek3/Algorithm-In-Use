@@ -3,52 +3,77 @@
 // @ianpasm(kno30826@gmail.com)
 // 2018-04-22 16:09:35
 // 
-// @Reb Black Tree 
-//  Ref1: https://bbs.pediy.com/thread-225432.html
-//  Ref2: http://www.sohu.com/a/201923614_466939
-//  Ref3: https://segmentfault.com/a/1190000000472153 
-//  Ref4: https://blog.csdn.net/v_JULY_v/article/details/6114226
+// @Red Black Tree Ref
 //
-//
-// @Nature
-//  Roughly,
-//  	BST's nature (but there is a flaw, it has line performance)
-//  	Auto-banlance
-//  	Nodes' color is red or black
-//  	Root node's color is black
-//  	All leaf nodes' color is black and it's value is NULL
-//  	All red nodes' two subnodes' color is black, cannot exisit two continuous red nodes
-//  	Any nodes come to it's leaf nodes of path which have same numbers black nodes
-//  Specially,
-//	1) Every nodes' color are all red or black
-//	2) The root's color is black
-//	3) Every leaf node(NIL node)'s color is black
-//	4) If one node's color is red then it's two childs are all black
-//	5) With every node, same black nodes on the path which to it's grandchild node
-//
-//  @Insert
-//	Whatever which red node will be inserted, nature 2) and 4) will be cracked. 
-//	Solutions:
-//		1) Move up the node which cracked nature then fixed it up
-//		2) Enum all possible then integerity it
-//		   Case:
-//			1) insert node is root
-//			2) insert node's father is black
-//			3) current node's father is red and it's grandfather's other subchild(uncle node) is red
-//			4) current node(rchild)'s father is red and it's uncle node is black,
-//			5) current node(lchild)'s father is red and it's uncle node is black,
-//  
-//  @Delete
-//	The suitation of delete same with delete of binary search tree, but we should consider the case of lost banlance of origin rbtree. 
-//	Case:
-//	     1) No child, a leaf
-//	     2) One child, rchild or lchild
-//	     3) Two child, rchild and lchild
-//
-//
-// @Fix Up
+//      Ref1: https://bbs.pediy.com/thread-225432.html
+//      Ref2: http://www.sohu.com/a/201923614_466939
+//      Ref3: https://segmentfault.com/a/1190000000472153 
+//      Ref4: https://blog.csdn.net/v_JULY_v/article/details/6114226
 //
 // 
+// @Appendix
+//
+//      红黑树可以保证在最坏的情况下基本动态集合操作的时间复杂度为O(lgn).
+//      为了处理红黑树中代码边界的问题，使用一个哨兵T.nil来代表NIL.
+//      黑高：bh(x)，即从某个节点x出发(不含该节点)到达一个叶结点的任意一条简单路径上的黑色结点个数.
+//      
+//
+//
+//
+// 
+// 
+//
+// @Nature
+//
+//  Roughly,
+//
+//  	BST's nature (but there is a flaw, it has line performance).
+//  	Auto-banlance.
+//  	Nodes' color is red or black.
+//  	Root node's color is black.
+//  	All leaf nodes' color is black and it's value is NULL.
+//  	All red nodes' two subnodes' color is black, cannot exisit two continuous red nodes.
+//  	Any nodes come to it's leaf nodes of path which have same numbers black nodes.
+//  
+//  Specially,
+//
+//	    1) Every nodes' color are all red or black 每个节点或是红色或是黑色.
+//	    2) The root's color is black 根节点是黑色的.
+//	    3) Every leaf node(NIL node)'s color is black 每个叶节点是黑色的.
+//	    4) If one node's color is red then it's two childs are all black 如果一个节点是红色的，则它的两个子节点是黑色的.
+//	    5) With every node, same black nodes on the path which to it's grandchild node 对每个节点，从该节点到其所有后代叶节点的简单路径上，均包含相同数目的黑色节点.
+//
+//
+// @Ratation
+//
+//
+//
+// 
+// @Insert
+//	
+//	Whatever which red node will be inserted, nature 2) and 4) will be cracked. 
+//	
+//	Solutions:
+//
+//		1) Move up the node which cracked nature then fixed it up.
+//		2) Enum all possible then integerity it.
+//		   Case:
+//			1) insert node is root.
+//			2) insert node's father is black.
+//			3) current node's father is red and it's grandfather's other subchild(uncle node) is red.
+//			4) current node(rchild)'s father is red and it's uncle node is black.
+//			5) current node(lchild)'s father is red and it's uncle node is black.
+// 
+//
+// @Delete
+//
+//  The suitation of delete same with delete of binary search tree, but we should consider the case of lost banlance of origin rbtree.
+//	
+//	Case:
+//	     1) No child, a leaf.
+//	     2) One child, rchild or lchild.
+//	     3) Two child, rchild and lchild.
+//
 //
 //
  
