@@ -1,4 +1,4 @@
-## AlgorithmNotes
+## Algorithm
 
 Personal learning Algorithm notes.Instances with .cpp|.cc or .c files.
 

@@ -4,6 +4,7 @@ The goal of the project is to improve the actual coding and thinking skills thro
 
 ![AIU](https://github.com/i0Ek3/Algorithm-In-Use/blob/master/image/AIU.png)
 
+
 ## Content
 
 <details>
@@ -18,11 +19,11 @@ The goal of the project is to improve the actual coding and thinking skills thro
 
 ## Based
 
-- Algorithm Notes
+- Algorithms(4 Edition)
 - Introduction to Algorithms
+- Algorithm Notes
 - Aha! Algorithm
-- Algorithm(4 Edition)
-
+- 王道机试指南
 
 ## Log
 
