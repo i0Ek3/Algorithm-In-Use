@@ -6,11 +6,14 @@ public:
 
     int pop() {
         if (stack2.size() <= 0) {
-            while (stack1.size() != 0) {
-                stack2.push(stack1.pop());
+            while (stack1.size() > 0) {
+                stack2.push(stack1.top());
+                stack1.pop();
             }
         }
-        return stack2.pop()
+        int res = stack2.top();
+        stack2.pop();
+        return res;
     }
 private:
     stack<int> stack1;
