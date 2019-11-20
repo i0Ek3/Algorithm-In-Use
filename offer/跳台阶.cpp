@@ -15,9 +15,3 @@ int jump(int n) {
     return n1;
 }
 
-int main()
-{
-    std::cout << "Hello world" << std::endl;
-    return 0;
-}
-
