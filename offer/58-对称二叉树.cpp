@@ -7,8 +7,8 @@ public:
     
     bool h(TreeNode* left, TreeNode* right) {
         if (left == nullptr && right == nullptr) return true;
-        if (left == nullptr || right == nullptr) return true;
+        if (left == nullptr || right == nullptr) return false;
         if (left->val != right->val) return false;
-        return left->val == right->val && h(left->left, right->right) && h(left->right, right->left)
+        return left->val == right->val && h(left->left, right->right) && h(left->right, right->left);
     }
 };
