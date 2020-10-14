@@ -7,7 +7,7 @@ func Replace(str string) string {
 			s = s + "%20"
 			continue
 		}
-		s = s + str[i]
+		s = s + string(str[i])
 	}
 	return s
 }
