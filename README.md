@@ -12,7 +12,6 @@ The goal of the project is to improve the actual coding and thinking skills thro
 <summary>View Content</summary>
 
 
-- [Offer(updating...)](https://github.com/i0Ek3/Algorithm-In-Use/tree/master/Offer)
 - [Algorithms(4 Edition) (updating...)](https://github.com/i0Ek3/Algorithm-In-Use/tree/master/Algorithms?1537182777414)
 - [Introduction to Algorithms (planning...)]()
 - [Algorithm Notes (finished)](https://github.com/i0Ek3/Algorithm-In-Use/tree/master/AlgorithmNotes?1537182890737)
@@ -27,10 +26,4 @@ The goal of the project is to improve the actual coding and thinking skills thro
 
 ## Log
 
-
 Maybe I should divide the algorithm into different class, such as array, stack, and so on, okay, I will do it. 
-
-
-
-
-
